@@ -1,28 +1,81 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
-#include <iostream>
+#include<iostream>
+#include<queue>
 using namespace std;
-int main()
-{
-    int a=5;
-    cout<<(++a)*(++a);
-    //in right shift case we divide the number from 2 
-    //and in left cast multiply by 2.
-    // int a=-13;
-    // a=a>>1;
-    // cout<<a;
-    // bool a = true;
-    // bool b=false;
-   // cout<<(a^b);
-    // cout<<(2&3)<<endl;
-    // cout<<(5&10);
-    // cout<<(3|7);
-    // cout<<~(~a);
-    return 0;
+
+
+class Queue{
+    public:
+    int *arr;
+    int size;
+    int front;
+    int rear;
+    
+    Queue(int size){
+        this->size=size;
+        arr=new int[size];
+        front=0;
+        rear=0;
+    }
+    void push(int data){
+        if(rear==size){
+            cout<<"queue is full"<<endl;
+        }
+        else{
+            arr[rear]=data;
+            rear++;
+        }
+    }
+    void pop(){
+        if(front==rear){
+            cout<<"Q is empty"<<endl;
+        }
+        else{
+            arr[front] =-1;
+            front++;
+            if(front == rear){
+                front=0;
+                rear=0;
+            }
+        }
+    }
+    int getFront(){
+        if(front==rear){
+            cout<<"Q is empty"<<endl;
+            return -1;
+        }else{
+            return arr[front];
+        }
+    }
+    bool isEmpty(){
+        if(front == rear){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    int getSize(){
+        return rear-front;
+    }
+};
+int main(){
+    // queue<int>q;
+    Queue q(10);
+    
+    q.push(2);
+    q.push(3);
+    q.push(8);
+    q.push(5);
+    q.push(7);
+    cout<<"size: "<<q.getSize()<<endl;
+    
+    q.pop();
+    cout<<"after pop size: "<<q.getSize()<<endl;
+    
+    if(q.isEmpty()){
+        cout<<"empty"<<endl;
+    }else{
+        cout<<"not empty"<<endl;
+    }
+    cout<<"front element: "<<q.getFront()<<endl;
 }
